@@ -25,7 +25,9 @@
 -->
 <xsl:stylesheet
         xmlns:dc="http://purl.org/dc/doc:elements/1.1/"
-        xmlns:oai="http://www.openarchives.org/OAI/2.0/" xmlns:oai_branding="http://www.openarchives.org/OAI/2.0/branding/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
+        xmlns:oai="http://www.openarchives.org/OAI/2.0/"
+        xmlns:oai_branding="http://www.openarchives.org/OAI/2.0/branding/"
+        xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
         xmlns:oai_friends="http://www.openarchives.org/OAI/2.0/friends/"
         xmlns:oai_gateway="http://www.openarchives.org/OAI/2.0/gateway/"
         xmlns:oai_identifier="http://www.openarchives.org/OAI/2.0/oai-identifier"
@@ -33,7 +35,8 @@
         xmlns:oai_rights="http://www.openarchives.org/OAI/2.0/rights/"
         xmlns:toolkit="http://oai.dlib.vt.edu/OAI/metadata/toolkit"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        exclude-result-prefixes="oai oai_identifier oai_rights oai_friends oai_branding oai_gateway toolkit oai_provenance oai_dc dc" version="1.0">
+        exclude-result-prefixes="oai oai_identifier oai_rights oai_friends oai_branding oai_gateway toolkit oai_provenance oai_dc dc"
+        version="1.0">
     <xsl:output encoding="UTF-8" indent="yes" method="html"/>
     <!-- Variables -->
     <!-- ============================================================================================= -->
@@ -170,7 +173,7 @@
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"/>
                     </div>
                     <div class="modal-body">
-                        <table class="table">
+                        <table class="table text-break">
                             <tbody>
                                 <tr>
                                     <th scope="row" style="width:25%">Request</th>
@@ -292,12 +295,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group mb-3">
-                            <span class="input-group-text">from</span>
-                            <input aria-label="From" class="form-control" id="timespanFromInput" type="date"
-                                   value="{/oai:OAI-PMH/oai:request/@from}"/>
-                            <span class="input-group-text">until</span>
-                            <input aria-label="Until" class="form-control" id="timespanUntilInput" type="date"
-                                   value="{/oai:OAI-PMH/oai:request/@until}"/>
+                            <span class=" input-group-text">from</span>
+                            <input aria-label="From" class="form-control" id="timespanFromInput"
+                                   style="min-width:150px;" type="date" value="{/oai:OAI-PMH/oai:request/@from}"/>
+                            <span class=" input-group-text">until</span>
+                            <input aria-label="Until" class="form-control" id="timespanUntilInput"
+                                   style="min-width:150px;"
+                                   type="date" value="{/oai:OAI-PMH/oai:request/@until}"/>
                             <button class="btn btn-primary" id="timespanSetBtn" type="submit">Set</button>
                         </div>
                     </div>
@@ -336,12 +340,12 @@
             </xsl:when>
             <!-- Last page without total. -->
             <xsl:otherwise>
-                <xsl:text>the last </xsl:text>
+                <xsl:text>the last&#160;</xsl:text>
                 <xsl:value-of select="$count"/>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="$total">
-            <xsl:text> of </xsl:text>
+            <xsl:text>&#160;of&#160;</xsl:text>
             <xsl:value-of select="$total"/>
         </xsl:if>
     </xsl:template>
@@ -397,9 +401,9 @@
                         <xsl:text>btnGroupDrop</xsl:text>
                         <xsl:value-of select="position()"/>
                     </xsl:attribute>
-                    <xsl:text>Included in </xsl:text>
+                    <xsl:text>Included in&#160;</xsl:text>
                     <xsl:value-of select="count($path)"/>
-                    <xsl:text> Sets</xsl:text>
+                    <xsl:text>&#160;Sets</xsl:text>
                 </button>
                 <ul class="dropdown-menu">
                     <xsl:attribute name="aria-labelledby">
@@ -513,10 +517,10 @@
                             <xsl:value-of select="$icon-formats"/>
                         </xsl:attribute>
                     </i>
-                    <xsl:text> </xsl:text>
+                    <xsl:text>&#160;</xsl:text>
                     <xsl:value-of select="$processedItem"/>
                 </a>
-                <xsl:text> </xsl:text>
+                <xsl:text>&#160;</xsl:text>
                 <xsl:call-template name="tokenizeMetadataLinksItems">
                     <xsl:with-param name="datalist" select="substring-after($datalist, $delimiter)"/>
                     <xsl:with-param name="oaiId" select="$oaiId"/>
@@ -580,7 +584,7 @@
         <xsl:value-of select="name()"/>
         <!-- Namespaces -->
         <xsl:for-each select="namespace::*">
-            <xsl:text> xmlns</xsl:text>
+            <xsl:text>&#160;xmlns</xsl:text>
             <xsl:if test="name() != ''">
                 <xsl:text>:</xsl:text>
                 <xsl:value-of select="name()"/>
@@ -593,7 +597,7 @@
         </xsl:for-each>
         <!-- Attributes -->
         <xsl:for-each select="@*">
-            <xsl:text> </xsl:text>
+            <xsl:text>&#160;</xsl:text>
             <xsl:value-of select="name()"/>
             <xsl:text>='</xsl:text>
             <xsl:call-template name="escape-xml">
@@ -618,7 +622,7 @@
     <xsl:template match="processing-instruction()" mode="escape">
         <xsl:text>&lt;?</xsl:text>
         <xsl:value-of select="name()"/>
-        <xsl:text> </xsl:text>
+        <xsl:text>&#160;</xsl:text>
         <xsl:call-template name="escape-xml">
             <xsl:with-param name="text" select="."/>
         </xsl:call-template>
@@ -672,7 +676,8 @@
     <!-- GetRecords -->
     <!-- ============================================================================================= -->
     <xsl:template match="oai:OAI-PMH/oai:GetRecord">
-        <h1 class="pb-2 border-bottom">Get Record:
+        <h1 class="pb-2 border-bottom text-break">Get Record:
+            <xsl:text>&#160;</xsl:text>
             <xsl:value-of select="/oai:OAI-PMH/oai:request/@identifier"/>
         </h1>
         <xsl:call-template name="responseInformation">
@@ -693,7 +698,7 @@
                                 <xsl:value-of select="concat($icon-getrecord, ' ', 'h5')"/>
                             </xsl:attribute>
                         </i>
-                        <xsl:text> Record</xsl:text>
+                        <xsl:text>&#160;Record</xsl:text>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -746,7 +751,7 @@
                                                                 <xsl:value-of select="$icon-identifiers"/>
                                                             </xsl:attribute>
                                                         </i>
-                                                        <xsl:text> List Identifiers</xsl:text>
+                                                        <xsl:text>&#160;List Identifiers</xsl:text>
                                                     </a>
                                                     <a class="btn btn-primary"
                                                        href="?verb=ListRecords&amp;metadataPrefix={/oai:OAI-PMH/oai:request/@metadataPrefix}&amp;set={$urlencodedSetId}"
@@ -756,7 +761,7 @@
                                                                 <xsl:value-of select="$icon-records"/>
                                                             </xsl:attribute>
                                                         </i>
-                                                        <xsl:text> List Records</xsl:text>
+                                                        <xsl:text>&#160;List Records</xsl:text>
                                                     </a>
                                                 </div>
                                             </td>
@@ -823,7 +828,7 @@
                                     <xsl:value-of select="text()"/>
                                 </a>
                                 <xsl:if test="position() != last()">
-                                    <xsl:text>, </xsl:text>
+                                    <xsl:text>,&#160;</xsl:text>
                                 </xsl:if>
                             </xsl:for-each>
                         </td>
@@ -1115,7 +1120,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="/oai:OAI-PMH/oai:request/@set">
-                <h1 class="pb-2 border-bottom">List Identifiers:
+                <h1 class="pb-2 border-bottom text-break">List Identifiers:
                     <xsl:value-of select="/oai:OAI-PMH/oai:request/@set"/>
                     <xsl:text> </xsl:text>
                     <span class="badge bg-secondary">
@@ -1127,7 +1132,8 @@
                 </h1>
             </xsl:when>
             <xsl:otherwise>
-                <h1 class="pb-2 border-bottom">List Identifiers<xsl:text> </xsl:text>
+                <h1 class="pb-2 border-bottom text-break">List Identifiers
+                    <xsl:text>&#160;</xsl:text>
                     <span class="badge bg-secondary">
                         <xsl:value-of select="count(oai:header)"/>
                         <xsl:if test="oai:resumptionToken/text() != ''">
@@ -1236,6 +1242,7 @@
     <!-- ============================================================================================= -->
     <xsl:template match="oai:OAI-PMH/oai:ListMetadataFormats">
         <h1 class="pb-2 border-bottom">List Metadata Formats
+            <xsl:text>&#160;</xsl:text>
             <span class="badge bg-secondary">
                 <xsl:value-of select="count(oai:metadataFormat)"/>
             </span>
@@ -1257,13 +1264,13 @@
                         </h2>
                         <dl>
                             <dt>Namespace</dt>
-                            <dd>
+                            <dd class="text-break">
                                 <a href="{oai:metadataNamespace/text()}" target="_blank">
                                     <xsl:value-of select="oai:metadataNamespace/text()"/>
                                 </a>
                             </dd>
                             <dt>Schema</dt>
-                            <dd>
+                            <dd class="text-break">
                                 <a href="{oai:schema/text()}" target="_blank">
                                     <xsl:value-of select="oai:schema/text()"/>
                                 </a>
@@ -1278,7 +1285,7 @@
                                         <xsl:value-of select="$icon-identifiers"/>
                                     </xsl:attribute>
                                 </i>
-                                <xsl:text> List Identifiers</xsl:text>
+                                <xsl:text>&#160;List Identifiers</xsl:text>
                             </a>
                             <a class="btn btn-primary"
                                href="{concat(/oai:OAI-PMH/oai:request/text(), '?verb=ListRecords&amp;metadataPrefix=', oai:metadataPrefix/text())}"
@@ -1288,7 +1295,7 @@
                                         <xsl:value-of select="$icon-records"/>
                                     </xsl:attribute>
                                 </i>
-                                <xsl:text> List Records</xsl:text>
+                                <xsl:text>&#160;List Records</xsl:text>
                             </a>
                         </div>
                     </div>
@@ -1302,7 +1309,8 @@
     <xsl:template match="oai:OAI-PMH/oai:ListRecords">
         <xsl:choose>
             <xsl:when test="/oai:OAI-PMH/oai:request/@set">
-                <h1 class="pb-2 border-bottom">List Records:
+                <h1 class="pb-2 border-bottom text-break">List Records:
+                    <xsl:text>&#160;</xsl:text>
                     <xsl:value-of select="/oai:OAI-PMH/oai:request/@set"/>
                     <xsl:text> </xsl:text>
                     <span class="badge bg-secondary">
@@ -1314,7 +1322,8 @@
                 </h1>
             </xsl:when>
             <xsl:otherwise>
-                <h1 class="pb-2 border-bottom">List Records<xsl:text> </xsl:text>
+                <h1 class="pb-2 border-bottom">List Records
+                    <xsl:text>&#160;</xsl:text>
                     <span class="badge bg-secondary">
                         <xsl:value-of select="count(oai:record)"/>
                         <xsl:if test="oai:resumptionToken/@completeListSize">
@@ -1358,7 +1367,7 @@
                                 <xsl:value-of select="concat($icon-getrecord, ' ', 'h5')"/>
                             </xsl:attribute>
                         </i>
-                        <xsl:text> Record </xsl:text>
+                        <xsl:text>&#160;Record&#160;</xsl:text>
                         <xsl:value-of select="position()"/>
                     </div>
                     <div class="card-body">
@@ -1412,7 +1421,7 @@
                                                                 <xsl:value-of select="$icon-identifiers"/>
                                                             </xsl:attribute>
                                                         </i>
-                                                        <xsl:text> List Identifiers</xsl:text>
+                                                        <xsl:text>&#160;List Identifiers</xsl:text>
                                                     </a>
                                                     <a class="btn btn-primary"
                                                        href="?verb=ListRecords&amp;metadataPrefix={/oai:OAI-PMH/oai:request/@metadataPrefix}&amp;set={$urlencodedSetId}"
@@ -1422,7 +1431,7 @@
                                                                 <xsl:value-of select="$icon-records"/>
                                                             </xsl:attribute>
                                                         </i>
-                                                        <xsl:text> List Records</xsl:text>
+                                                        <xsl:text>&#160;List Records</xsl:text>
                                                     </a>
                                                 </div>
                                             </td>
@@ -1473,6 +1482,7 @@
             </xsl:call-template>
         </xsl:variable>
         <h1 class="pb-2 border-bottom">List Sets
+            <xsl:text>&#160;</xsl:text>
             <span class="badge bg-secondary">
                 <xsl:value-of select="count(oai:set)"/>
                 <xsl:if test="oai:resumptionToken/@completeListSize">
@@ -1542,7 +1552,7 @@
                                                         <xsl:value-of select="$icon-description"/>
                                                     </xsl:attribute>
                                                 </i>
-                                                <xsl:text> Description </xsl:text>
+                                                <xsl:text>&#160;Description&#160;</xsl:text>
                                             </a>
                                         </xsl:when>
                                         <xsl:otherwise>
@@ -1552,7 +1562,7 @@
                                                         <xsl:value-of select="$icon-description"/>
                                                     </xsl:attribute>
                                                 </i>
-                                                <xsl:text> Description</xsl:text>
+                                                <xsl:text>&#160;Description</xsl:text>
                                             </a>
                                         </xsl:otherwise>
                                     </xsl:choose>
@@ -1563,7 +1573,7 @@
                                                 <xsl:value-of select="$icon-identifiers"/>
                                             </xsl:attribute>
                                         </i>
-                                        <xsl:text> List Identifiers</xsl:text>
+                                        <xsl:text>&#160;List Identifiers</xsl:text>
                                     </a>
                                     <a class="btn btn-primary"
                                        href="{concat(/oai:OAI-PMH/oai:request/text(), '?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=', oai:setSpec/text())}">
@@ -1572,7 +1582,7 @@
                                                 <xsl:value-of select="$icon-records"/>
                                             </xsl:attribute>
                                         </i>
-                                        <xsl:text> List Records</xsl:text>
+                                        <xsl:text>&#160;List Records</xsl:text>
                                     </a>
                                 </div>
                                 <xsl:if test="oai:setDescription != ''">
@@ -1755,7 +1765,7 @@
                             referrerpolicy="no-referrer"
                             src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"/>
                     <script>
-                        <![CDATA[    
+                        <![CDATA[
                         $(document).ready(function () {
                             hljs.highlightAll();   
                         });
@@ -1765,7 +1775,7 @@
                 <xsl:if test="oai:OAI-PMH/oai:ListSets or oai:OAI-PMH/oai:ListIdentifiers">
                     <script src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fh-3.2.4/r-2.3.0/sc-2.0.7/datatables.min.js"/>
                     <script>
-                        <![CDATA[    
+                        <![CDATA[
                         $(document).ready(function() {
                            var table = $('#datatable').DataTable({
                                "dom": 'Bifrtp',
@@ -1875,7 +1885,7 @@
                 <!-- Tooltip for Show more -->
                 <xsl:if test="oai:OAI-PMH/oai:ListSets or oai:OAI-PMH/oai:ListIdentifiers or oai:OAI-PMH/oai:ListRecords">
                     <script>
-                        <![CDATA[    
+                        <![CDATA[
                         $(document).ready(function () {  
                            $('[data-bs-toggle="tooltip"]').tooltip(); 
                         });

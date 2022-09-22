@@ -26,32 +26,53 @@ This XSLT script is based on an [XSLT script](https://github.com/Daniel-KM/Omeka
 
 ## Screenshots
 ### OAI request: Identify
+#### Desktop
 ![Identify](images/01_Identify.png "Identify")
+#### Mobile
+![Identify](images/01_Identify_resp.png "Identify")
 
 ---
 ### OAI request: ListMetadataFormats
+#### Desktop
 ![ListMetadataFormats](images/02_ListMetadataFormats.png "ListMetadataFormats")
+#### Mobile
+![ListMetadataFormats](images/02_ListMetadataFormats_resp.png "ListMetadataFormats")
 
 ---
 ### OAI request: ListMetadataFormats
-![ListSets](images/03_ListSets.png "ListSets")
 Datatables is used to display data as tables as many as possible.
+#### Desktop
+![ListSets](images/03_ListSets.png "ListSets")
+#### Mobile
+![ListSets](images/03_ListSets_resp.png "ListSets")
 
 ---
 ### OAI request: ListMetadataFormats
+#### Desktop
 ![ListIdentifiers](images/04a_ListIdentifiers.png "ListIdentifiers")
+#### Mobile
+![ListIdentifiers](images/04a_ListIdentifiers_resp.png "ListIdentifiers")
 
 ---
 ### OAI request: ListMetadataFormats
-![ListIdentifiers](images/04b_ListIdentifiers.png "ListIdentifiers")
 Every response has further information, which is displayed in a Bootstrap modal.
+#### Desktop
+![ListIdentifiers](images/04b_ListIdentifiers.png "ListIdentifiers")
+#### Mobile
+![ListIdentifiers](images/04b_ListIdentifiers_resp.png "ListIdentifiers")
 
 ---
 ### OAI request: ListMetadataFormats
-![ListIdentifiers](images/04c_ListIdentifiers.png "ListIdentifiers")
 The configuration of time spans (parameters `from` and `until`) is supported by the frontend, too.
+#### Desktop
+![ListIdentifiers](images/04c_ListIdentifiers.png "ListIdentifiers")
+#### Mobile
+![ListIdentifiers](images/04c_ListIdentifiers_resp.png "ListIdentifiers")
 
 ---
 ### OAI request: ListMetadataFormats
-![GetRecord](images/06_GetRecord.png "GetRecord")
 The XML data of a record is highlighted.
+#### Desktop
+![GetRecord](images/06_GetRecord.png "GetRecord")
+#### Mobile
+![GetRecord](images/06_GetRecord_resp.png "GetRecord")
