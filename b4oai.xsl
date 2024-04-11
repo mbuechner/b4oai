@@ -41,7 +41,7 @@
     <!-- Variables -->
     <!-- ============================================================================================= -->
     <xsl:param name="homepage-text" select="'DDBoai'"/>
-    <xsl:param name="homepage-logo" select="'res/images/logo-ddbpro-RGB.webp'"/>
+    <xsl:param name="homepage-logo" select="'/oai/docs/logo-ddbpro.svg'"/>
     <xsl:param name="homepage-logo-text" select="''"/>
     <!-- Icons -->
     <xsl:param name="favicon" select="'../images/favicon.ico'"/>
